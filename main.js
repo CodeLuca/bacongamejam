@@ -157,5 +157,20 @@ var mainState = {
     }
 };
 
+var mainMenu = {
+    preload: function(){
+        game.load.image('bg', 'assets/menu.png');
+    },
+    create: function(){
+        game.add.sprite(0, 0, 'bg');
+        var spacePress = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        spacePress.onDown.add(this.spaceEvent, this);
+    },
+    spaceEvent: function(){
+        game.state.start('main');
+    }
+};
+
 game.state.add('main', mainState);
-game.state.start('main');
+game.state.add('menu', mainMenu);
+game.state.start('menu');
