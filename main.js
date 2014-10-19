@@ -6,9 +6,12 @@ var score = 100;
 var peoples = [];
 var exists = false;
 var criminalString;
+var music;
 var criminalHair, criminalSkin, criminalClothes;
-var mainState = {
+
+    var mainState = {
     preload: function(){
+        game.add.text(30, 50, "Loading... Fact: In Miami, it is forbidden to imitate an animal.", {font: "30px Trebuchet MS" , fill:"#fff"});
         game.load.image('background','assets/bg.png');
         game.load.image('player', 'assets/policeman.png');
         game.load.image('red', 'assets/red.png');
@@ -17,24 +20,38 @@ var mainState = {
         game.load.image('blondwhiteblue', 'assets/blondwhiteblue.png');
         game.load.image('brownwhiteblue', 'assets/brownwhiteblue.png');
         game.load.image('blondblackred', 'assets/blondblackred.png');
-        game.load.image('brownblackred', 'assets/blondblackred.png');
+        game.load.image('brownblackred', 'assets/brownblackred.png');
         game.load.image('blondwhitered', 'assets/blondwhitered.png');
         game.load.image('brownwhitered', 'assets/brownwhitered.png');
-},
+        game.load.audio('sfx', 'assets/music1.mp3');
+    },
     create: function(){
+
+        music = game.add.audio('sfx');
+
+        music.play('');
+
         this.people = game.add.group();
-        game.add.tileSprite(0, 0, 1920, 1920, 'background');
+        this.text = game.add.group();
+        this.backg = game.add.tileSprite(0, 0, 1920, 1920, 'background');
+        this.backg.alpha = 0;
+        this.add.tween(this.backg).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true, 100, false);
         game.world.setBounds(0, 0, 1920, 1920);
         game.physics.startSystem(Phaser.Physics.ARCADE);
         this.createCriminal();
         player = game.add.sprite(960, 960, 'player');
         player.scale.setTo(2,2);
+        player.alpha = 0;
+        this.add.tween(player).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true, 100, false);
         game.physics.arcade.enable(player);
         game.camera.follow(player);
-        this.skin = game.add.text(20, 20, "Skin Colour: ", { font: "30px Courier New", fill: "#fff" });
-        this.hair = game.add.text(20, 50, "Hair Colour: ", { font: "30px Courier New", fill: "#ffffff" });
-        this.score = game.add.text(900, 20, "100", { font: "30px Courier New", fill: "#ffffff" });
-        this.clothes = game.add.text(20, 80, "Clothes Colour: ", { font: "30px Courier New", fill: "#ffffff" });
+        this.skin = game.add.text(20, 20, "Skin Colour: ", { font: "30px Shadows Into Light", fill: "#fff" }, this.text);
+        this.hair = game.add.text(20, 50, "Hair Colour: ", { font: "30px Shadows Into Light", fill: "#ffffff" }, this.text);
+        this.score = game.add.text(900, 20, "100", { font: "30px Trebuchet MS", fill: "#ffffff" }, this.text);
+        this.clothes = game.add.text(20, 80, "Clothes Colour: ", { font: "30px Shadows Into Light", fill: "#ffffff" }, this.text);
+        game.world.bringToTop(this.text);
+        this.text.alpha = 0;
+        this.add.tween(this.text).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true, 100, false);
         this.score.fixedToCamera = true;
         this.skin.fixedToCamera = true;
         this.hair.fixedToCamera = true;
@@ -42,8 +59,8 @@ var mainState = {
         cursors = game.input.keyboard.createCursorKeys();
         this.timer = game.time.events.loop(700, this.createPlayer, this);
         this.timer2 = game.time.events.loop(1500, this.movePeople, this);
-
     },
+
     update: function(){
         game.physics.arcade.overlap(player, this.people, this.hitPerson, null, this);
 
@@ -70,7 +87,9 @@ var mainState = {
             score -= 5;
             this.score.text = score;
         }
-        guy.kill();
+        this.people.remove(guy);
+        game.world.bringToTop(guy);
+        var tweening = this.add.tween(guy).to({alpha: 0}, 2000, Phaser.Easing.Linear.None, true, 100, false);
     },
 
     hitCriminal: function(p, crim){
@@ -160,17 +179,32 @@ var mainState = {
 var mainMenu = {
     preload: function(){
         game.load.image('bg', 'assets/menu.png');
+        game.load.audio('sfx', 'assets/music2.mp3');
     },
     create: function(){
-        game.add.sprite(0, 0, 'bg');
+        this.music2 = game.add.audio('sfx');
+        this.timer = game.time.events.loop(1000, this.spacebar, this);
+        this.music2.play('');
+        var bg = game.add.sprite(0, 600, 'bg');
+        var sprite_tween = this.add.tween(bg);
+        sprite_tween.to({x: 0, y: 0}, 1500 /*duration of the tween (in ms)*/,
+        Phaser.Easing.Bounce.Out /*easing type*/, true /*autostart?*/, 100 /*delay*/, false /*yoyo?*/);
+        sprite_tween.start(100);
+    },
+    spacebar: function(){
         var spacePress = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         spacePress.onDown.add(this.spaceEvent, this);
     },
     spaceEvent: function(){
+        this.music2.stop();
         game.state.start('main');
     }
 };
 
+var Fight = {
+
+}
+
 game.state.add('main', mainState);
-game.state.add('menu', mainMenu);
+game.state.add('menu', mainMenu);;
 game.state.start('menu');
