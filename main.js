@@ -52,11 +52,11 @@ var criminalHair, criminalSkin, criminalClothes;
 
     createText: function(){
 
-        this.skin = game.add.text(20, 20, "Skin Colour: ", { font: "30px Shadows Into Light", fill: "#fff" }, this.text);
+        this.skin = game.add.text(20, 20, "Skin Colour: ", { font: "30px Raleway", fill: "#fff" }, this.text);
         this.skin.text = "Skin Colour: ";
-        this.hair = game.add.text(20, 60, "Hair Colour: ", { font: "30px Shadows Into Light", fill: "#ffffff" }, this.text);
-        this.score = game.add.text(900, 20, "100", { font: "30px Shadows Into Light", fill: "#ffffff" }, this.text);
-        this.clothes = game.add.text(20, 100, "Clothes Colour: ", { font: "30px Shadows Into Light", fill: "#ffffff" }, this.text);
+        this.hair = game.add.text(20, 60, "Hair Colour: ", { font: "30px Raleway", fill: "#ffffff" }, this.text);
+        this.score = game.add.text(900, 20, "100", { font: "30px Raleway", fill: "#ffffff" }, this.text);
+        this.clothes = game.add.text(20, 100, "Clothes Colour: ", { font: "30px Raleway", fill: "#ffffff" }, this.text);
         game.world.bringToTop(this.text);
         this.text.alpha = 0;
         this.add.tween(this.text).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true, 100, false);
@@ -68,6 +68,7 @@ var criminalHair, criminalSkin, criminalClothes;
     },
 
     update: function(){
+        player.anchor.setTo(.5, 1);
         game.physics.arcade.overlap(player, this.people, this.hitPerson, null, this);
 
         game.physics.arcade.overlap(player, this.criminal, this.hitCriminal, null, this);
@@ -78,8 +79,8 @@ var criminalHair, criminalSkin, criminalClothes;
     if (cursors.up.isDown) { player.body.velocity.y = -300;player.body.angle = 0;}
     else if (cursors.down.isDown) { player.body.velocity.y = 300; }
     else{player.body.velocity.y = 0;}
-    if (cursors.left.isDown) { player.body.velocity.x = -300; }
-    else if (cursors.right.isDown) { player.body.velocity.x = 300; }
+    if (cursors.left.isDown) {player.body.velocity.x = -300; player.scale.x = -2;}
+    else if (cursors.right.isDown) { player.body.velocity.x = 300; player.scale.x = 2; }
     else{player.body.velocity.x = 0;}
     },
 
@@ -124,7 +125,7 @@ var criminalHair, criminalSkin, criminalClothes;
             game.physics.arcade.enable(peoples[no]);
             peoples[no].body.collideWorldBounds = true;
         no++;
-        if(no > 5){
+        if(no > 10){
             game.time.events.remove(this.timer);
         }
             exists = true;
@@ -188,7 +189,7 @@ var mainMenu = {
         game.load.audio('sfx', 'assets/music2.mp3');
     },
     create: function(){
-        this.game.add.text(0, 0, "fix", {font:"1px Shadows Into Light", fill:"#FFFFFF"});
+        this.game.add.text(0, 0, "fix", {font:"1px Raleway", fill:"#FFFFFF"});
         this.music2 = game.add.audio('sfx');
         this.timer = game.time.events.loop(1000, this.spacebar, this);
         this.music2.play('');
@@ -210,7 +211,7 @@ var mainMenu = {
 
 var Fight = {
     prelioad: function(){
-        
+
     }
 }
 
