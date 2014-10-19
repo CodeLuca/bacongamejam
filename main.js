@@ -185,6 +185,7 @@ var criminalHair, criminalSkin, criminalClothes;
 
 var mainMenu = {
     preload: function(){
+        game.add.text(30, 50, "Loading... Fact: In Miami, it is forbidden to imitate an animal.", {font: "30px Trebuchet MS" , fill:"#fff"});
         game.load.image('bg', 'assets/menu.png');
         game.load.audio('sfx', 'assets/music2.mp3');
     },
