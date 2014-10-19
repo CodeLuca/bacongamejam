@@ -375,8 +375,8 @@ var Fight = {
     },
     moveCriminal: function() {
 
-        if(criminalFight.y < playerFight.y && criminalFight.y < 5 + playerFight.y){criminalFight.y += 0.5;} else if (criminalFight.y > playerFight.y && criminalFight.y > 5+ playerFight.y){criminalFight.y += -0.5}
-        if(criminalFight.x < playerFight.x && criminalFight.x < 5 + playerFight.x){criminalFight.x += 0.5;} else if (criminalFight.x > playerFight.x && criminalFight.x > 5+ playerFight.x){criminalFight.x += -0.5}
+        if(criminalFight.y < playerFight.y && criminalFight.y < 5 + playerFight.y){criminalFight.y += 0.5 + + (level/10);} else if (criminalFight.y > playerFight.y && criminalFight.y > 5+ playerFight.y){criminalFight.y += -0.5 + + (level/10)}
+        if(criminalFight.x < playerFight.x && criminalFight.x < 5 + playerFight.x){criminalFight.x += 0.5 + + (level/10);} else if (criminalFight.x > playerFight.x && criminalFight.x > 5+ playerFight.x){criminalFight.x += -0.5 + + (level/10)}
     },
     criminalShoot: function() {
         var useBrick = game.add.sprite(criminalFight.x, criminalFight.y, 'brick');
