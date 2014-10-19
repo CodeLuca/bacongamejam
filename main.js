@@ -238,7 +238,7 @@ var mainMenu = {
 
 var Fight = {
     preload: function(){
-        game.add.text(30, 50, criminalString + "Loading... Fact: In Miami, it is forbidden to imitate an animal.", {font: "30px Raleway" , fill:"#fff"});
+        game.add.text(30, 50, "Loading... Fact: In Miami, it is forbidden to imitate an animal.", {font: "30px Raleway" , fill:"#fff"});
         game.load.image('player', 'assets/policeman.png');
         game.load.image('bullet', 'assets/bullet.png');
         game.load.image('bullet2', 'assets/bullet2.png');
