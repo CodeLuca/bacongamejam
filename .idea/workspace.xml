@@ -26,8 +26,8 @@
       <file leaf-file-name="main.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.34397164" vertical-offset="2514" max-vertical-offset="3390">
-              <caret line="187" column="141" selection-start-line="187" selection-start-column="141" selection-end-line="187" selection-end-column="141" />
+            <state vertical-scroll-proportion="0.56395346" vertical-offset="2635" max-vertical-offset="6000">
+              <caret line="208" column="18" selection-start-line="208" selection-start-column="18" selection-end-line="208" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -134,7 +134,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="replace&#9;ACTION&#9;Replace&#10;find&#9;ACTION&#9;Find&#10;shortcuts&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="find&#9;ACTION&#9;Find&#10;replace&#9;ACTION&#9;Replace&#10;fin&#9;ACTION&#9;Find&#10;shortcuts&#9;null&#9;null" />
     <property name="options.lastSelected" value="preferences.keymap" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -282,8 +282,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34397164" vertical-offset="2514" max-vertical-offset="3390">
-          <caret line="187" column="141" selection-start-line="187" selection-start-column="141" selection-end-line="187" selection-end-column="141" />
+        <state vertical-scroll-proportion="0.56395346" vertical-offset="2635" max-vertical-offset="6000">
+          <caret line="208" column="18" selection-start-line="208" selection-start-column="18" selection-end-line="208" selection-end-column="18" />
           <folding />
         </state>
       </provider>
