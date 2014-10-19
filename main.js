@@ -102,12 +102,12 @@ var criminalFight, playerFight;
 
     hitPerson: function(p, guy){
         var chance = Math.floor((Math.random() * level) + 1);
+        score -= 5;
         if (chance == 1){
             var which = Math.floor((Math.random() * 3) + 1);
             if (which == 1){if(!(this.skin.text == "Skin Colour: " + criminalSkin)){ this.skin.text += criminalSkin; this.skin.fill = criminalSkin;}}
             else if (which == 2){if(!(this.hair.text == "Hair Colour: " + criminalHair)){this.hair.text += criminalHair; this.hair.fill = criminalHair;}}
             else if (which == 3){if(!(this.clothes.text == "Clothes Colour: " + criminalClothes)){this.clothes.text += criminalClothes; this.clothes.fill = criminalClothes;}}
-            score -= 5;
             scoreText.text = score;
         }
         this.people.remove(guy);
