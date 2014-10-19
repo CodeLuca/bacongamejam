@@ -101,8 +101,8 @@ var criminalFight, playerFight;
     },
 
     hitPerson: function(p, guy){
-        var chance = Math.floor((Math.random() * level) + 1);
         score -= 5;
+        var chance = Math.floor((Math.random() * level) + 1);
         if (chance == 1){
             var which = Math.floor((Math.random() * 3) + 1);
             if (which == 1){if(!(this.skin.text == "Skin Colour: " + criminalSkin)){ this.skin.text += criminalSkin; this.skin.fill = criminalSkin;}}
