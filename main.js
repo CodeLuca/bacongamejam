@@ -2,12 +2,13 @@ var game = new Phaser.Game(1000, 640, Phaser.CANVAS, 'gameDiv');
 var cursors;
 var player;
 var no = 0;
-var score = 100;
+var score = 0;
 var peoples = [];
 var gangArray = [];
 var exists = false;
 var criminalString;
 var level = 1;
+var scoreText;
 var music;
 var mute = false;
 var criminalHair, criminalSkin, criminalClothes;
@@ -67,18 +68,18 @@ var criminalFight, playerFight;
         this.skin = game.add.text(20, 20, "Skin Colour: ", { font: "30px Raleway", fill: "#fff" }, this.text);
         this.skin.text = "Skin Colour: ";
         this.hair = game.add.text(20, 60, "Hair Colour: ", { font: "30px Raleway", fill: "#ffffff" }, this.text);
-        this.score = game.add.text(900, 20, "100", { font: "30px Raleway", fill: "#ffffff" }, this.text);
+        scoreText = game.add.text(900, 20, score, { font: "30px Raleway", fill: "#ffffff" }, this.text);
         this.clothes = game.add.text(20, 100, "Clothes Colour: ", { font: "30px Raleway", fill: "#ffffff" }, this.text);
-        this.level = game.add.text(20, 600, "Level: " + level, { font: "30px Raleway", fill: "#ffffff" }, this.text);
+        this.level = game.add.text(20, 600, "Level: " + level + " - Chance of info: 1/" + level, { font: "30px Raleway", fill: "#ffffff" }, this.text);
         game.world.bringToTop(this.text);
         this.text.alpha = 0;
         this.add.tween(this.text).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true, 100, false);
-        this.score.fixedToCamera = true;
+        scoreText.fixedToCamera = true;
         this.skin.fixedToCamera = true;
         this.hair.fixedToCamera = true;
         this.clothes.fixedToCamera = true;
         this.level.fixedToCamera = true;
-
+        scoreText.text = score;
     },
 
     update: function(){
@@ -106,7 +107,7 @@ var criminalFight, playerFight;
             else if (which == 2){if(!(this.hair.text == "Hair Colour: " + criminalHair)){this.hair.text += criminalHair; this.hair.fill = criminalHair;}}
             else if (which == 3){if(!(this.clothes.text == "Clothes Colour: " + criminalClothes)){this.clothes.text += criminalClothes; this.clothes.fill = criminalClothes;}}
             score -= 5;
-            this.score.text = score;
+            scoreText.text = score;
         }
         this.people.remove(guy);
         game.world.bringToTop(guy);
@@ -206,6 +207,7 @@ var mainMenu = {
         game.load.audio('sfx', 'assets/music2.mp3');
     },
     create: function(){
+        score = 0;
         level = 1;
         this.game.add.text(0, 0, "fix", {font:"1px Raleway", fill:"#FFFFFF"});
         this.music2 = game.add.audio('sfx');
@@ -266,6 +268,7 @@ var Fight = {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         this.bullets = game.add.group();
         this.bullets2 = game.add.group();
+        game.world.setBounds(0, 0, 1000, 640);
 
         game.world.bringToTop(this.bullets);
         game.world.bringToTop(this.gangmembers);
@@ -307,7 +310,6 @@ var Fight = {
         game.physics.arcade.overlap(criminalFight, this.bullets2, this.hitCriminaly, null, this);
         game.physics.arcade.overlap(this.gangmembers, this.bullets2, this.hit, null, this);
 
-        playerFight.body.angle = 0;
         playerFight.body.collideWorldBounds = true;
 
         if (cursors.up.isDown) { playerFight.body.velocity.y = -200;playerFight.body.angle = 0;}
@@ -320,6 +322,7 @@ var Fight = {
     },
 
     hit: function (one, two) {
+        score += 5;
         one.kill();
     },
 
@@ -343,6 +346,7 @@ var Fight = {
     },
 
     nextLevel: function (){
+        score += 100;
         level++;
         music.stop();
         game.state.start('main');
@@ -358,7 +362,6 @@ var Fight = {
     },
     gangShoot: function() {
         var which = Math.floor((Math.random() * gangArray.length));
-
         var useBullet = game.add.sprite(gangArray[which].x, gangArray[which].y, 'bullet');
         this.bullets.add(useBullet);
         game.physics.arcade.enable(useBullet);
