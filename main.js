@@ -16,7 +16,7 @@ var criminalFight, playerFight;
 
     var mainState = {
     preload: function(){
-        game.add.text(30, 50, "Loading... Fact: In Miami, it is forbidden to imitate an animal.", {font: "30px Raleway" , fill:"#fff"});
+        game.add.text(30, 320, "Loading... Fact: In Miami, it is forbidden to imitate an animal.", {font: "30px Raleway" , fill:"#fff"});
         game.load.image('background','assets/bg.png');
         game.load.image('player', 'assets/policeman.png');
         game.load.image('blondblackblue', 'assets/blondblackblue.png');
@@ -31,6 +31,7 @@ var criminalFight, playerFight;
     },
 
     create: function(){
+        no = 0;
         mute = false;
         music = game.add.audio('sfx');
         music.play('',0,1,true);
@@ -202,11 +203,14 @@ var criminalFight, playerFight;
 
 var mainMenu = {
     preload: function(){
+        game.stage.backgroundColor = "#004b02";
         game.add.text(30, 50, "Loading... Fact: In Miami, it is forbidden to imitate an animal.", {font: "30px Raleway" , fill:"#fff"});
         game.load.image('bg', 'assets/menu.png');
         game.load.audio('sfx', 'assets/music2.mp3');
     },
     create: function(){
+        313131
+        no = 0;
         score = 0;
         level = 1;
         this.game.add.text(0, 0, "fix", {font:"1px Raleway", fill:"#FFFFFF"});
