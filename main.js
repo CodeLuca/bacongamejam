@@ -30,7 +30,7 @@ var criminalHair, criminalSkin, criminalClothes;
         music = game.add.audio('sfx');
 
         music.play('');
-
+        game.time.events.add(Phaser.Timer.SECOND, this.createText, this);
         this.people = game.add.group();
         this.text = game.add.group();
         this.backg = game.add.tileSprite(0, 0, 1920, 1920, 'background');
@@ -45,10 +45,18 @@ var criminalHair, criminalSkin, criminalClothes;
         this.add.tween(player).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true, 100, false);
         game.physics.arcade.enable(player);
         game.camera.follow(player);
+        cursors = game.input.keyboard.createCursorKeys();
+        this.timer = game.time.events.loop(700, this.createPlayer, this);
+        this.timer2 = game.time.events.loop(1500, this.movePeople, this);
+    },
+
+    createText: function(){
+
         this.skin = game.add.text(20, 20, "Skin Colour: ", { font: "30px Shadows Into Light", fill: "#fff" }, this.text);
-        this.hair = game.add.text(20, 50, "Hair Colour: ", { font: "30px Shadows Into Light", fill: "#ffffff" }, this.text);
-        this.score = game.add.text(900, 20, "100", { font: "30px Trebuchet MS", fill: "#ffffff" }, this.text);
-        this.clothes = game.add.text(20, 80, "Clothes Colour: ", { font: "30px Shadows Into Light", fill: "#ffffff" }, this.text);
+        this.skin.text = "Skin Colour: ";
+        this.hair = game.add.text(20, 60, "Hair Colour: ", { font: "30px Shadows Into Light", fill: "#ffffff" }, this.text);
+        this.score = game.add.text(900, 20, "100", { font: "30px Shadows Into Light", fill: "#ffffff" }, this.text);
+        this.clothes = game.add.text(20, 100, "Clothes Colour: ", { font: "30px Shadows Into Light", fill: "#ffffff" }, this.text);
         game.world.bringToTop(this.text);
         this.text.alpha = 0;
         this.add.tween(this.text).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true, 100, false);
@@ -56,9 +64,7 @@ var criminalHair, criminalSkin, criminalClothes;
         this.skin.fixedToCamera = true;
         this.hair.fixedToCamera = true;
         this.clothes.fixedToCamera = true;
-        cursors = game.input.keyboard.createCursorKeys();
-        this.timer = game.time.events.loop(700, this.createPlayer, this);
-        this.timer2 = game.time.events.loop(1500, this.movePeople, this);
+
     },
 
     update: function(){
@@ -182,6 +188,7 @@ var mainMenu = {
         game.load.audio('sfx', 'assets/music2.mp3');
     },
     create: function(){
+        this.game.add.text(0, 0, "fix", {font:"1px Shadows Into Light", fill:"#FFFFFF"});
         this.music2 = game.add.audio('sfx');
         this.timer = game.time.events.loop(1000, this.spacebar, this);
         this.music2.play('');
@@ -202,7 +209,9 @@ var mainMenu = {
 };
 
 var Fight = {
-
+    prelioad: function(){
+        
+    }
 }
 
 game.state.add('main', mainState);
