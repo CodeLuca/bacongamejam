@@ -209,7 +209,6 @@ var mainMenu = {
         game.load.audio('sfx', 'assets/music2.mp3');
     },
     create: function(){
-        313131
         no = 0;
         score = 0;
         level = 1;
